@@ -1,7 +1,7 @@
 package com.yodo.caz.myapplication;
 
 import android.os.AsyncTask;
-import android.util.Log;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -15,6 +15,11 @@ import java.util.List;
 
 public class GetCategoriesTask extends AsyncTask<String, String, List<Category>> {
 
+    CategoryResponseListener listener;
+    public GetCategoriesTask(CategoryResponseListener listener){
+
+        this.listener = listener;
+    }
     @Override
     protected List<Category> doInBackground(String... strings) {
         URL url = null;
@@ -53,7 +58,13 @@ public class GetCategoriesTask extends AsyncTask<String, String, List<Category>>
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Log.d("Categories", categories.toString());
+
         return categories;
+    }
+
+    @Override
+    protected void onPostExecute(List<Category> categories) {
+        super.onPostExecute(categories);
+        listener.onCategoriesLoaded(categories);
     }
 }
