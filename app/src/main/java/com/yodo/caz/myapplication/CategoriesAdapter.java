@@ -32,6 +32,8 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
         String name = categories.get(i).getName();
 
         categoryViewHolder.setCategoryName(name);
+        categoryViewHolder.setCategory(categories.get(i));
+        categoryViewHolder.setListener((CategoryRecyclerViewClickListener) context);
     }
 
     @Override
@@ -43,6 +45,8 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
 
         private TextView categoryName;
         private ImageView ivCategory;
+        private CategoryRecyclerViewClickListener listener;
+        private Category category;
         public CategoryViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -50,6 +54,19 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
         }
         public void setCategoryName(String name){
             this.categoryName.setText(name);
+        }
+        public void setCategory(Category category){
+            this.category = category;
+        }
+        public void setListener(final CategoryRecyclerViewClickListener listener){
+            this.listener = listener;
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onCategoryRecyclerViewClicked(category);
+                }
+            });
+
         }
     }
 
