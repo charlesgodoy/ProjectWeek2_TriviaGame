@@ -12,6 +12,16 @@
         android:id="@+id/ivSplashLogo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
         app:srcCompat="@drawable/quiz" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivSplashLogo"
+
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="29dp"
+        android:text="Trivia app" />
 </RelativeLayout>
